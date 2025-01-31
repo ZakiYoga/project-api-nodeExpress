@@ -5,10 +5,17 @@ export const startServer = () => {
   const httpServer = express();
   const port = config.port;
 
-  try {
+  // TODO - abstract this to the router
+  // Test route for port config
 
-    console.log("Testing docker images");
-    
+  httpServer.get("/ping", (req, res) => {
+    console.log(`Ping route ${req.url} ${Date.now()}`);
+    res.status(200).json({
+      message: "Test Succesful",
+    });
+  });
+
+  try {
     httpServer.listen(port, () => {
       console.log(`Server running on port ${port}`);
     });
