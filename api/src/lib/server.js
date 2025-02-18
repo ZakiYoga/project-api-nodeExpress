@@ -1,5 +1,6 @@
 import express from "express";
 import config from "./config.js";
+import { setupRoutes } from "./setupRoutes.js";
 
 export const startServer = () => {
   const httpServer = express();
@@ -8,12 +9,7 @@ export const startServer = () => {
   // TODO - abstract this to the router
   // Test route for port config
 
-  httpServer.get("/ping", (req, res) => {
-    console.log(`Ping route ${req.url} ${Date.now()}`);
-    res.status(200).json({
-      message: "Test Succesful",
-    });
-  });
+  setupRoutes(httpServer);
 
   try {
     httpServer.listen(port, () => {
